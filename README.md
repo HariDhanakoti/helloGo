@@ -1,10 +1,10 @@
 # helloGo
 
-#Run in local dev mode
+# Run in local dev mode
 
 go run main.go
 
-#Build and run the helloGo application
+# Build and run the helloGo application
 
 docker build -t gowebapp .
 
