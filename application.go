@@ -35,23 +35,4 @@ func main() {
 
 	fmt.Println("Listening")
 	fmt.Println(http.ListenAndServe(":8080", nil))
-
-	// router := newRouter()
-	// http.ListenAndServe(":8080", router)
 }
-
-/*
-func newRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/", Hello)
-	http.Handle("/", r)
-	fmt.Println("Starting up on 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-	return r
-}
-
-// Hello Http method for testing
-func Hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(w, "Hello world!")
-}
-*/
