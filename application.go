@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"time"
-
-	"html/template"
 )
 
 //Welcome basic struct for welcome page
@@ -33,6 +32,6 @@ func main() {
 		}
 	})
 
-	fmt.Println("Listening")
+	fmt.Println("Listening port 8080")
 	fmt.Println(http.ListenAndServe(":8080", nil))
 }
