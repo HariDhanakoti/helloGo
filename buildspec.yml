@@ -10,21 +10,18 @@ phases:
         - echo.Logging in to Amazon ECR...
         - aws --version
         - $(aws ecr get-login --no-include-email --region ap-southeast-2)
-        - REPOSITORY_URI=438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/hellogo:latest
-        - COMMIT_HASH=$(echo $CODEBUID_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-        - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+        - docker buld -t hellogo .
     build:
       commands:
         - echo Build started on 'date'
         - echo Building Docker image
         - docker build -t $REPOSITORY_URI:latest .   
-        - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+        - docker tag hellogo:latest 438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/hellogo:latest
     post_build:
       commands:
         - echo Build completed on 'date'
         - echo Pushing the Docker image
-        - docker push $REPOSITORY_URI:latest
-        - docker push $REPOSITORY_URI:$IMAGE_TAG
+        - docker push 438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/hellogo:latest
     artifacts:
       files:
         - imageDetail.json
