@@ -10,12 +10,11 @@ phases:
         - echo.Logging in to Amazon ECR...
         - aws --version
         - $(aws ecr get-login --no-include-email --region ap-southeast-2)
-        - docker buld -t hellogo .
+        - docker build -t hellogo .
     build:
       commands:
         - echo Build started on 'date'
         - echo Building Docker image
-        - docker build -t $REPOSITORY_URI:latest .   
         - docker tag hellogo:latest 438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/hellogo:latest
     post_build:
       commands:
