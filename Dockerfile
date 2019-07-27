@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM 438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/golang:alpine
 
 WORKDIR /go/src/app
 
