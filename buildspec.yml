@@ -1,0 +1,31 @@
+version: 0.1
+            
+phases:
+  pre_build:
+    install: 
+      commands:
+        - go get -u github.com/golang/lint/golint
+
+    pre_build: 
+      commands:
+        - echo.Logging in to Amazon ECR...
+        - aws --version
+        - $(aws ecr get-login --no-include-email $AWS_DEFAULT_REGION)
+        - REPOSITORY_URI=438991312594.dkr.ecr.ap-southeast-2.amazonaws.com/hellogo:latest
+        - COMMIT_HASH=$(echo $CODEBUID_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+        - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+    build:
+      commands:
+        - echo Build started on 'date'
+        - echo Building Docker image
+        - docker build -t $REPOSITORY_URI:latest .   
+        - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+    post_build:
+      commands:
+        - echo Build completed on 'date'
+        - echo Pushing the Docker image
+        - docker push $REPOSITORY_URI:latest
+        - docker push $REPOSITORY_URI:$IMAGE_TAG
+    artifacts:
+      files:
+        - imageDetail.json
