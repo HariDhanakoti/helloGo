@@ -32,6 +32,6 @@ func main() {
 		}
 	})
 
-	fmt.Println("Listening port from docker : 8080")
+	fmt.Println("Listening port 8080 from docker")
 	fmt.Println(http.ListenAndServe(":8080", nil))
 }
